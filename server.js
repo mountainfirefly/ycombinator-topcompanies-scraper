@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+const cron = require('node-cron');
+const scraper = require('./scraper');
 
 // set the port of our application
 // process.env.PORT lets the port be set by Heroku
@@ -13,6 +15,12 @@ app.get('/', function(req, res) {
 
     // ejs render automatically looks in the views folder
     res.send('Welcome! To get y-combinator top companies list go to /ycinfo.json');
+});
+
+// Cron Job
+cron.schedule('1 25 11 * *', () => {
+    console.log('running a task every minute');
+    scraper();
 });
 
 app.listen(port, function() {

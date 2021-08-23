@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 });
 
 // Cron Job
-cron.schedule('1 25 11 * *', () => {
+cron.schedule('25 11 * * *', () => {
     console.log('running a task every minute');
     scraper();
 });

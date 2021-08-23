@@ -40,7 +40,7 @@ request({ url: 'https://www.ycombinator.com/topcompanies', gzip: true }, functio
     });
     
     // Writing data to ycInfo.json file
-    fs.writeFile("./ycInfo.json", JSON.stringify(data), (err) => {
+    fs.writeFile("./public/ycinfo.json", JSON.stringify(data), (err) => {
       if (err) {
           return;
       };

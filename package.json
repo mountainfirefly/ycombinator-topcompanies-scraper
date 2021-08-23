@@ -5,6 +5,7 @@
   "main": "scraper.js",
   "dependencies": {
     "cheerio": "1.0.0-rc.2",
+    "express": "^4.17.1",
     "fs": "0.0.1-security",
     "node-fetch": "2.2.1",
     "request": "2.88.0"

@@ -18,7 +18,7 @@ app.get('/', function(req, res) {
 
 app.use(express.static(__dirname + '/public'));
 
-cron.schedule('50 21 * * *', function () {
+cron.schedule('55 21 * * *', function () {
     scraper().then(() => {
         console.log('done');
     })

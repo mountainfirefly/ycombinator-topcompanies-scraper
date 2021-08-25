@@ -1,4 +1,5 @@
 var express = require('express');
+var cron = require('node-cron');
 var app = express();
 
 const scraper = require('./scraper');
@@ -15,26 +16,13 @@ app.get('/', function(req, res) {
     res.send('Welcome! To get y-combinator top companies list go to /ycinfo.json');
 });
 
-const getDate = () => {
-    const date = new Date();
-    return `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
-}
-
-app.get('/ycinfo.json', function(req, res, next) {
-    const todaysDate = getDate();
-
-    if (!lastCreatedDate || lastCreatedDate !== todaysDate) {
-        lastCreatedDate = todaysDate;
-        scraper().then((res) => {
-            console.log(res)
-            next();
-        })
-    } else {
-        next();
-    }
-});
-
 app.use(express.static(__dirname + '/public'));
+
+cron.schedule('50 21 * * *', function () {
+    scraper().then(() => {
+        console.log('done');
+    })
+})
 
 app.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);

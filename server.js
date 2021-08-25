@@ -26,6 +26,7 @@ app.get('/ycinfo.json', function(req, res, next) {
     if (!lastCreatedDate || lastCreatedDate !== todaysDate) {
         lastCreatedDate = todaysDate;
         scraper().then((res) => {
+            console.log(res)
             next();
         })
     } else {
